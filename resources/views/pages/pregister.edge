@@ -1,0 +1,87 @@
+@layout('layout.master')
+
+@section('content')
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>History</h1>
+          </div>
+        </div>
+
+         <div class="row">
+          <div class="col-sm-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Services</h3>
+
+              </div>
+
+
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                  <tr>
+
+                    <th>Service Name</th>
+                    <th>Link owner</th>
+                    <th>Aggregation</th>
+                    <th>Status</th>
+
+                    <th>Bandwidth</th>
+                    <th>VLAN</th>
+                    <th>Last mile trx</th>
+                    <th>Last mile equipment</th>
+                    <th>Coordinates</th>
+
+
+
+
+
+
+
+
+                  </tr>
+                  @each(pregister in pregisters)
+                  <tr>
+                    <td>{{pregister.name}}</td>
+                    <td>{{pregister.contact}}</td>
+                    <td>{{pregister.rate.casual_id}}</td>
+                    <td>{{pregister.role}}</td>
+                    <td>{{pregister.rate.basic}}</td>
+                    <td>{{pregister.rate.casual_id}}</td>
+                    <td>{{pregister.role}}</td>
+                    <td>{{pregister.rate.basic}}</td>
+                    <td>{{pregister.rate.basic}}</td>
+
+
+
+
+
+
+
+
+                    <td>
+
+                  @endeach
+
+
+                  </tr>
+
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div><!-- /.row -->
+</div>
+
+
+
+      </div><!-- /.container-fluid -->
+    </section>
+
+@endsection

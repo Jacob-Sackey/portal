@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>MDNS DB| Log in</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Font Awesome -->
+  {{css('css/font-awesome.min.css')}}
+  <!-- Ionicons -->
+  {{css('css/ionicons.min.css')}}
+  <!-- Theme style -->
+  {{css('css/adminlte.min.css')}}
+  <!-- iCheck -->
+  {{css('css/blue.css')}}
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body class="hold-transition login-page" >
+<nav class="navbar is-dark" >
+  <div class="container" >
+    <div class="navbar-brand">
+
+
+    </div>
+
+  </div>
+
+</nav>
+<div class="login-box">
+  <div class="login-logo">
+    <a href="#"><b>MDNS</b>DB</a>
+  </div>
+  <!-- /.login-logo -->
+  @include('partials.notification')
+  <div class="card">
+    <div class="card-body login-card-body">
+      <p class="login-box-msg">Set Your New Password</p>
+
+      <form action="/password/change" method="POST">
+        {{ csrfField() }}
+        <input type="hidden" name="id" value="{{id}}">
+        <div class="form-group has-feedback">
+
+          <input type="password" name="password" class="form-control" placeholder="New Password" >
+          {{ elIf('<span style="color:red">$self</span>', getErrorFor('password'), hasErrorFor('password')) }}
+
+        </div>
+        <div class="form-group has-feedback">
+          <input type="password" name="confirm_password" class="form-control" placeholder="Confirm Password" >
+          {{ elIf('<span style="color:red">$self</span>', getErrorFor('confirm_password'), hasErrorFor('confirm_password')) }}
+
+        </div>
+
+
+
+          <!-- /.col -->
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary">Reset Password</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+    <!-- /.login-card-body -->
+  </div>
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery -->
+ {{ script('js/jquery.min.js') }}
+<!-- Bootstrap 4 -->
+ {{ script('js/bootstrap.bundle.min.js') }}
+<!-- iCheck -->
+{{ script('js/icheck.min.js') }}
+<script>
+  $(function () {
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      radioClass   : 'iradio_square-blue',
+      increaseArea : '20%' // optional
+    })
+  })
+</script>
+</body>
+</html>
+

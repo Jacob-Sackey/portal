@@ -1,0 +1,99 @@
+@layout('layout.master')
+@section('content') 
+<div class="content-wrapper">
+      <!-- Main content -->
+    <section class="content">
+    <div class="container-fluid">
+          <form id="see"> 
+            <div class="form-group">
+              <div class="input-group-prepend">
+                    <div class="col-sm-6">
+                      <input id="daterange-btn" name="daterange" class="form-control form-control-navbar" type="text" placeholder="Date Range" aria-label="Search">
+                      </div>
+                      <div class="col-sm-3">
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                      </div>
+                      </div>
+            </div>
+                    </form>
+                
+          </div>  
+    <!-- SEARCH FORM -->
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table class="table table-bordered table-hover">
+
+                <tr>
+                  <th>ID</th>
+                  <th> Employee Name</th>
+                    <th>On Time</th> 
+                    <th>Late</th>
+                    <th>After 9am</th>
+                    <th>Absent</th> 
+                    <th>Options</th>
+                </tr>
+          @each(HrEmploye in HrEmployee)
+            <div id="dateResults">
+                <tr>
+                  <td> {{HrEmploye.EmpIDex}} </td>
+                  <td> {{HrEmploye.EmplName}} </td>
+                  <td> {{HrEmploye.OnTime}} </td>
+                  <td> {{HrEmploye.Late}} </td>
+                  <td>{{HrEmploye.After9AM}}</td>
+                  <td>3</td>
+                  <td><a href="#" class="btn btn-warning"><i class="fa fa-eye"></i></a></td>
+               </tr>
+            </div>
+          @endeach 
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+</div>
+</div>
+</div>
+       
+</div>
+</div>
+    </section>
+    <!-- /.content -->
+  </div>
+
+<!-- ./wrapper -->
+@endsection
+@section('scripts')
+<script>
+  $(document).ready(function(){
+      $('#daterange-btn').daterangepicker(
+      {
+          locale: {
+          format:'YYYY-MM-DD'
+        }
+        
+      }
+    )
+    $('#see').on('submit',function(e){
+    e.preventDefault();
+    const token = '{{crsfToken}}'
+    var daterange =  $("input[name='daterange']").val();
+    //var dateResults = $("dateResults")
+    return $.ajax({
+
+              data:{_csrf:token, daterange :daterange},
+              success: function(){
+                      ("#dateResults").load("/filter");
+                  
+               
+              }
+          })
+    })
+  })
+</script>
+@endsection

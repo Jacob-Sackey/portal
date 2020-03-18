@@ -1,0 +1,76 @@
+@layout('layout.master')
+
+@section('content')
+<div class="content-wrapper">
+ <section class="content">
+  <p>
+                <!-- general form elements disabled -->
+            <div class="card card-warning">
+              <div class="card-header">
+                <h3 class="card-title">Payslip Information</h3>              
+        <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href ="/casual" class="btn btn-primary">Previous Page</a></li>
+        </ol>
+ 
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <form role="form" action="{{'/casinfo/update/' + casinfos.id +' ?_method=PUT'}}" method="POST">
+                {{csrfField()}}
+                  <!-- select -->
+                           
+
+                  
+                  <!-- text input -->
+                  <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" name="name" class="form-control" placeholder="Enter ..." value="{{casinfos.name}}"> 
+                    {{elIf('<span style="color:red">$self</span>',getErrorFor('name'),hasErrorFor('name'))}}
+                  </div>
+                  
+                  <div class="form-group">
+                  
+                    <label>Days worked</label>
+                    <input type="number" name="days" class="form-control" placeholder="Enter ..." value="{{rate.days}}">
+                    {{elIf('<span style="color:red">$self</span>',getErrorFor('days'),hasErrorFor('days'))}}
+                  </div>
+
+                  <div class="form-group">
+                    <label>Overtime hours</label>
+                    <input type="text" name="overhours" class="form-control" value="{{rate.overhours}}" placeholder="Enter ..." min="0" >
+                    {{elIf('<span style="color:red">$self</span>',getErrorFor('overhours'),hasErrorFor('overhours'))}}
+                  </div>
+
+
+                  <div class="form-group">
+                    <label>Month</label>
+                    <select class="form-control" name="month">
+                      <option>January</option>
+                      <option>February</option>
+                      <option>March</option>
+                      <option>April</option>
+                      <option>May</option>
+                      <option>June</option>
+                      <option>July</option>
+                      <option>August</option>
+                      <option>September</option>
+                      <option>October</option>
+                      <option>November</option>
+                      <option>December</option>
+                                            
+                    </select>
+                  </div>
+                  
+              <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                </form>
+              </div>
+
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+  </p>
+ </section>
+</div>
+@endsection

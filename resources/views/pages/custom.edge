@@ -1,0 +1,178 @@
+@layout('layout.master')
+@section('content')
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+
+          <div class="col-sm-6">
+            <h1> </h1>
+          </div>
+        </div>
+
+         <div class="row">
+          <div class="col-sm-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Custom Search</h3>
+
+                <div class="center">
+                  <form class="form-inline ml-3">
+                  <span class = "input-group input-group-sm">
+                    <input class="form-control form-control-navbar" type="Search" aria-label="Search">
+                    <div class="input-group-append">
+                      <button class="btn btn-navbar flat" type="submit">
+                        <i class="fa fa-search"></i>
+                      </button>
+
+                    </div>
+                  </span>
+                </form>
+                </div>
+
+
+                <div class="pull-right">
+                <a href="/createCustom" class="btn btn-primary"><i class="fa fa-plus"></i></a>
+                </div>
+
+              </div>
+
+
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                  <tr>
+
+                    <th>Customer Name</th>
+                    <th>Link Owner</th>
+                    <th>Aggregation</th>
+                    <th>Status</th>
+                    <th>Bandwidth</th>
+                    <th>VLAN</th>
+                    <th>LM_TRX</th>
+                    <th>LM_EQM</th>
+                    <th>Coordinates</th>
+
+
+
+
+
+                  </tr>
+                  @each(service in services)
+                  <tr>
+                    <td>{{service.service_name}}</td>
+                    <td>{{service.link_owner}}</td>
+                    <td>{{service.aggregation}}</td>
+                    <td>{{service.status}}</td>
+                    <td>{{service.bandwidth}}</td>
+                    <td>{{service.vlan}}</td>
+                    <td>{{service.last_mile_trx}}</td>
+                    <td>{{service.last_mile_equipment}}</td>
+                    {{--  <td>{{service.coordinates}}</td>  --}}
+
+
+
+
+
+
+
+                    <td>
+                    <a href="/customs/view/{{custom.id}}" class="btn btn-info"><i class="fa fa-eye"></i></a>
+
+                    <a href="/customs/edit/{{custom.id}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                    <a  class="btn btn-danger delete-custom" id="{{custom.id}}"><i class="fa fa-trash"></i></a>
+                    <!-- <a href="/payslip/view/{{custom.id}}" class="btn btn-success"><i class="fa fa-wpforms"></i></a> -->
+                    <a class="btn btn-success view-payslip" id="{{custom.id}}"><i class="fa fa-wpforms"></i></a>
+                    </td>
+
+
+                  @endeach
+
+
+
+                  </tr>
+
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div><!-- /.row -->
+</div>
+
+
+
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+  </div>
+@endsection
+@section('scripts')
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(document).on('click','.delete-custom',function(e){
+            e.preventDefault();
+            const token = '{{ csrfToken }}';
+            const id = $(this).attr('id');
+                swal({
+                title: "Are you sure?",
+                text: "custom will be removed permanently.Do you wish to proceed?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                })
+                .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                     url: '{{route('custom.delete')}}',
+                     type: 'DELETE',
+                     data: {_csrf:token,id:id},
+                     success: function(response){
+                      if(response.status === 'success'){
+                       swal('custom successfully deleted','success')
+                       location.reload()
+
+                      }
+                     }
+                    });
+                } else {
+                    swal("custom not deleted");
+                }
+                });
+        });
+     $(document).on('click','.view-payslip',function(a){
+                    a.preventDefault();
+            const token = '{{ csrfToken }}';
+            const id = $(this).attr('id');
+
+swal({
+  title:"PAYSLIP INFORMATION",
+  buttons: {
+    cancel: "cancel",
+     Print: {
+      text: "Print",
+      value: "Print",
+    },
+    Edit: true,
+  },
+})
+.then((value) => {
+  switch (value) {
+
+    case "Edit":
+      window.location.href = '/casinfo/edit/'+ $(this).attr('id');
+      break;
+
+    case "Print":
+        window.location.href = '/payslip/view/'+ $(this).attr('id');
+      break;
+
+  }
+
+            })
+          })
+    });
+</script>
+@endsection

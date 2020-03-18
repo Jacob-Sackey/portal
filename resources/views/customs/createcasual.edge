@@ -1,0 +1,100 @@
+@layout('layout.master')
+
+@section('content')
+  <div class="content-wrapper">
+    <section class="content-header">
+    <div class="container-fluid">
+    <div class="row mb-2">
+    <div class="col-sm-6">
+  <h2>Add Casual</h2>
+  </div>
+  <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href ="/casual" class="btn btn-primary">Previous Page</a></li>
+        </ol>
+  </div>
+  </div>
+  </div>
+  </section>
+  <p> <!-- general form elements disabled -->
+            <div class="card card-warning">
+              <div class="card-header">
+                <h3 class="card-title">Create Casual</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+              <form role="form" action="{{route('casuals.save')}}" method="POST">
+                {{csrfField()}}
+                  <!-- select -->
+                  
+
+                  <!-- text input -->
+                  <div class="form-group">
+                    <label>name</label>
+                    <input type="text" name="name" class="form-control" placeholder="Enter ..." >
+                    {{elIf('<span style="color:red">$self</span>',getErrorFor('name'),hasErrorFor('name'))}}
+                  </div>
+
+                  <div class="form-group">
+                    <label>Contact Number</label>
+                    <input type="text" name="contact" class="form-control" placeholder="Enter ..." >
+                    {{elIf('<span style="color:red">$self</span>',getErrorFor('contact'),hasErrorFor('contact'))}}
+                  </div>
+
+                  <div class="form-group">
+                    <label>Role</label>
+                    <select class="form-control" name="role">
+                      <option>Supervisor</option>
+                      <option>HSE</option>
+                      <option>Technician 1</option>
+                      <option>Technician 2</option>
+                      <option>Helper</option>
+                                                               
+                    </select>
+                    {{elIf('<span style="color:red">$self</span>',getErrorFor('role'),hasErrorFor('role'))}}
+                  </div>
+                  
+                  <div class="form-group">
+                    <label>Site ID</label>
+                    <input type="text" name="site_id" class="form-control" placeholder="Enter ..." >
+                    {{elIf('<span style="color:red">$self</span>',getErrorFor('site_id'),hasErrorFor('site_id'))}}
+                  </div>
+
+                  <div class="form-group">
+                    <label>Transport</label>
+                    <input type="text" name="tans_allow" class="form-control" placeholder="Enter ..." >
+                    {{elIf('<span style="color:red">$self</span>',getErrorFor('tans_allow'),hasErrorFor('stans_allow'))}}
+                  </div>
+
+                  <div class="form-group">
+                    <label>basic</label>
+                    <input type="text" name="basic" class="form-control" placeholder="Enter ..." >
+                    {{elIf('<span style="color:red">$self</span>',getErrorFor('basic'),hasErrorFor('basic'))}}
+                  </div>
+
+                 <div class="form-group">
+                    <label>Daily Allowance</label>
+                    <input type="text" name="daily_allow" class="form-control" placeholder="Enter ..." >
+                    {{elIf('<span style="color:red">$self</span>',getErrorFor('daily_allow'),hasErrorFor('daily_allow'))}}
+                  </div>
+
+                  <div class="form-group">
+                    <label>Overtime Rate</label>
+                    <input type="text" name="overrate" class="form-control" placeholder="Enter ..." >
+                    {{elIf('<span style="color:red">$self</span>',getErrorFor('overrate'),hasErrorFor('overrate'))}}
+                  </div>
+                      
+                
+                  <div class="card-footer">
+                     <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+
+                </form>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+  </p>
+ </section>
+</div>
+@endsection

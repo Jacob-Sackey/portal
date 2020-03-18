@@ -1,0 +1,145 @@
+@layout('layout.master')
+@section('content')
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>USERS</h1>
+          </div>
+        </div>
+
+         <div class="row">
+          <div class="col-sm-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Registered Users</h3>
+
+                <div class="pull-right">
+                <a href="/users/create" class="btn btn-primary"><i class="fa fa-plus"></i></a>
+                </div>
+              </div>
+
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                 @include('partials.notification')
+                <table class="table table-hover">
+                  <tr>
+
+                    <th>Employee Name</th>
+                    <th>Employee Number</th>
+                    <th>Date Created</th>
+
+                  </tr>
+                  @each(user in users)
+                  <tr>
+                    <td>{{user.name}}</td>
+                    <td>{{user.employee_number}}</td>
+                    <td>{{user.created_at}}</td>
+                    <td>
+                    <a href="/users/viewing/{{user.id}}" class="btn btn-info"><i class="fa fa-eye"></i></a>
+
+
+                    <a href="/users/edit/{{user.id}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                    <a  class="btn btn-danger delete-user" id="{{user.id}}"><i class="fa fa-trash"></i></a>
+                    <a  class="btn btn-default reset-password" id="{{user.id}}"><i class="fa fa-lock"></i></a>
+
+                    </td>
+
+
+
+                  </tr>
+                @endeach
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div><!-- /.row -->
+</div>
+
+
+
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+  </div>
+@endsection
+@section('scripts')
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(document).on('click','.delete-user',function(e){
+            e.preventDefault();
+            const token = '{{ csrfToken }}';
+            const id = $(this).attr('id');
+                swal({
+                title: "Are you sure?",
+                text: "User will be removed permanently.Do you wish to proceed?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                })
+                .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                     url: '/users/delete',
+                     type: 'DELETE',
+                     data: {_csrf:token,id:id},
+                     success: function(response){
+                      if(response.status === 'success'){
+                       swal('User successfully deleted','success')
+                       location.reload()
+
+                      }
+                     }
+                    });
+                } else {
+                    swal("Permission not deleted");
+                }
+                });
+        });
+
+       $(document).on('click','.reset-password',function(a){
+            a.preventDefault();
+            const token = '{{ csrfToken }}';
+            const id = $(this).attr('id');
+                swal({
+                title: "Are you sure?",
+                text: "You want to reset your Password?",
+                icon: "info",
+                buttons: true,
+                dangerMode: false,
+
+                })
+
+                .then((willReset) => {
+                if (willReset) {
+
+                    $.ajax({
+                     url: '{{route('users.reset')}}',
+                     type: 'POST',
+                     data: {_csrf:token,id:id},
+                     success: function(response){
+
+                      if(response.status === 'success'){
+                      //window.location.href = "{{route('email.reset')}}"
+
+                       swal('Password reset link sent','Please check your email')
+                      }
+                      if(response.status === 'null'){
+                       swal('Please alert system administrator for manual reset of password','User does not have an Employee email')
+                      }
+                     }
+                    });
+                } else {
+                    swal("Password remains the same");
+                }
+                });
+        });
+
+    });
+</script>
+
+@endsection

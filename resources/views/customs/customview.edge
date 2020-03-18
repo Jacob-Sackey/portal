@@ -1,0 +1,138 @@
+@layout('layout.master')
+@section('content')
+   <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Project View</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item" ><a href="/casual"  class="btn btn-primary">Previous Page</a></li>
+
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <div class="card card-default">
+          <div class="card-header">
+            <h3 class="card-title">Custom Details</h3>
+
+
+          </div>
+
+          <form role="form" action="" method="POST">
+               {{csrfField()}}
+                <div class="card-body">
+                 <div class="form-group">
+                    <label for="name">Name</label>
+                    <p>{{casual.name}}</p>
+                  </div>
+                <div class="form-group">
+                    <label for="contact">Contact</label>
+                    <p>{{casual.contact}}</p>
+                  </div>
+                  <div class="form-group">
+                    <label for="role">role</label>
+                    <p>{{casual.role}}</p>
+                  </div>
+                  <div class="form-group">
+                    <label for="site_id">site_id</label>
+                    <p>{{casual.site_id}}</p>
+                  </div>
+                  <div class="form-group">
+                    <label for="tans_allow">Transportation Allowance Rate</label>
+                    <p>{{rate.tans_allow}}</p>
+
+                  </div>
+                  <div class="form-group">
+                    <label for="tans_allow">Transportation Allowance</label>
+                    <p>{{rate.TnT}}</p>
+
+                  </div>
+
+                  <div class="form-group">
+                    <label for="tans_allow">Daily Allowance Rate</label>
+                    <p>{{rate.daily_allow}}</p>
+
+                  </div>
+
+                  <div class="form-group">
+                    <label for="tans_allow">Daily Allowance</label>
+                    <p>{{rate.allowance}}</p>
+
+                  </div>
+
+                  <div class="form-group">
+                    <label for="tans_allow">Tax Deduction</label>
+                    <p>{{rate.GRA}}</p>
+
+                  </div>
+
+                  <div class="form-group">
+                    <label for="tans_allow">SSNIT Deductions</label>
+                    <p>{{rate.SSNIT}}</p>
+
+                  </div>
+
+                  <div class="form-group">
+                    <label for="tans_allow">Over Time Rate</label>
+                    <p>{{rate.overrate}}</p>
+
+                  </div>
+                  <div class="form-group">
+                    <label for="tans_allow">Overtime Hours</label>
+                    <p>{{rate.overhours}}</p>
+
+                  </div>
+
+                  <div class="form-group">
+                    <label for="tans_allow">13% SSF</label>
+                    <p>{{rate.SSF_13}}</p>
+
+                  </div>
+
+                  <div class="form-group">
+                    <label for="tans_allow">Gross</label>
+                    <p>{{rate.gross}}</p>
+
+                  </div>
+
+                  <div class="form-group">
+                    <label for="tans_allow">Taxable Salary</label>
+                    <p>{{rate.taxable}}</p>
+
+                  </div>
+
+                  <div class="form-group">
+                    <label for="tans_allow">Net Payable Wage to Employee</label>
+                    <p>{{rate.net}}</p>
+
+                  </div>
+
+                  <div class="form-group">
+                    <label for="tans_allow">Cost to Company</label>
+                    <p>{{rate.comp_cost}}</p>
+
+                  </div>
+
+
+                </div>
+
+                <!-- /.card-body -->
+
+              </form>
+
+            </div>
+
+
+
+
+
+    </div>
+@endsection
+

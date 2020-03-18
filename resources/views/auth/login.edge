@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>MDNS Portal| Log in</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Font Awesome -->
+  {{css('css/font-awesome.min.css')}}
+  <!-- Ionicons -->
+  {{css('css/ionicons.min.css')}}
+  <!-- Theme style -->
+  {{css('css/adminlte.min.css')}}
+  <!-- iCheck -->
+  {{css('css/blue.css')}}
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body  background="/img/logpape.png" >
+<nav class="navbar is-dark" >
+  <div class="container" >
+    <div class="navbar-brand">
+
+
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-end">
+        @loggedIn
+          <div class="navbar-item has-dropdown is hoverable">
+            <a class="navbar-link">
+              {{auth.user.username}}
+            </a>
+            <div class="navbar-dropdown" >
+              <a class="navbar-item" href="/logout">Logout</a>
+
+            </div>
+
+          </div>
+
+        @endloggedIn
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+</nav>
+<div class="login-box">
+
+  <!-- /.login-logo -->
+  @include('partials.notifications')
+  <div class="card">
+    <div class="card-body login-card-body">
+      <div class="login-logo" >
+    <a href="{{route('login')}}"><b>MDNS DB</b>
+      <b>Portal</b></a>
+  </div>
+      <p class="login-box-msg">Sign in to start your session</p>
+
+      <form action="{{route('login')}}" method="post">
+        {{ csrfField() }}
+        <div class="form-group has-feedback">
+
+          <input type="username" name="username" class="form-control" placeholder="Username"  value="{{ old('username', '') }}">
+          {{ elIf('<span style="color:red">$self</span>', getErrorFor('username'), hasErrorFor('username')) }}
+
+        </div>
+        <div class="form-group has-feedback">
+          <input type="password" name="password" class="form-control" placeholder="Password"  value="{{ old('password', '') }}">
+          {{ elIf('<span style="color:red">$self</span>', getErrorFor('password'), hasErrorFor('password')) }}
+
+        </div>
+
+
+
+          <!-- /.col -->
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+    <!-- /.login-card-body -->
+  </div>
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery -->
+ {{ script('js/jquery.min.js') }}
+<!-- Bootstrap 4 -->
+ {{ script('js/bootstrap.bundle.min.js') }}
+<!-- iCheck -->
+{{ script('js/icheck.min.js') }}
+<script>
+  $(function () {
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      radioClass   : 'iradio_square-blue',
+      increaseArea : '20%' // optional
+    })
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+@layout('layout.master')
+@section('content')
+   <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Edit User</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item" ><a href="/users"  class="btn btn-primary">Previous Page</a></li>
+              
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <div class="card card-default">
+          <div class="card-header">
+            <h3 class="card-title">User Details</h3>
+
+        @include('partials.notification')
+          </div>
+          
+          <form role="form" action="{{'/users/update/' + user.id +' ?_method=PUT'}}" method="POST">
+               {{csrfField()}}
+                <div class="card-body">
+                 <div class="form-group">
+                    <label for="name">Employee Name</label>
+                    <input type="text" class="form-control" name="name" placeholder="Enter Employee Name" value="{{user.name}}">
+                     {{ elIf('<span style="color:red">$self</span>', getErrorFor('name'), hasErrorFor('name')) }}      
+                  </div>
+                <div class="form-group">
+                    <label for="name">Employee Number</label>
+                    <input type="text" class="form-control" name="employee_number" placeholder="Enter Employee Number" value="{{user.employee_number}}">
+                     {{ elIf('<span style="color:red">$self</span>', getErrorFor('employee_number'), hasErrorFor('employee_number')) }}      
+                  </div>
+                  <div class="form-group">
+                    <label for="name">User Name</label>
+                    <input type="text" class="form-control" name="username" placeholder="Enter User name" value="{{user.username}}">
+                     {{ elIf('<span style="color:red">$self</span>', getErrorFor('username'), hasErrorFor('username')) }}      
+                  </div>
+                  <div class="form-group">
+                    <label for="name">Mobile Number</label>
+                    <input type="text" class="form-control" name="phone" placeholder="Enter User mobile number" value="{{user.phone}}">
+                     {{ elIf('<span style="color:red">$self</span>', getErrorFor('phone'), hasErrorFor('phone')) }}      
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" name="email" placeholder="Email" value="{{user.email}}">
+                    {{ elIf('<span style="color:red">$self</span>', getErrorFor('slug'), hasErrorFor('slug')) }}
+                  </div>
+                  <div class="form-group">
+                    <label for="name">Department</label>
+                    <input type="text" class="form-control" name="department" placeholder="Enter User Department" value="{{user.department}}">
+                     {{ elIf('<span style="color:red">$self</span>', getErrorFor('department'), hasErrorFor('department')) }}      
+                  </div>
+                  <div class="form-group">
+                    <label for="name">Password</label>
+                    <input type="password" class="form-control" name="password" placeholder="Enter New user password" value="">
+                     {{ elIf('<span style="color:red">$self</span>', getErrorFor('password'), hasErrorFor('password')) }}      
+                  </div>
+                  <div class="form-group">
+                    <label for="name">Confirm Password</label>
+                    <input type="password" class="form-control" name="confirm_password" placeholder="Please re-type password" value="">
+                     {{ elIf('<span style="color:red">$self</span>', getErrorFor('confirm_password'), hasErrorFor('confirm_password')) }}      
+                  </div>
+  
+            
+                  </div>
+                 
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                 
+                </div>
+
+              </form>
+
+            </div>
+
+
+
+
+
+    </div>
+@endsection

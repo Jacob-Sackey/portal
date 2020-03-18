@@ -1,0 +1,90 @@
+@layout('layout.master')
+@section('content')
+   <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Service View</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item" ><a href="/services"  class="btn btn-primary">Previous Page</a></li>
+
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <div class="card card-default">
+          <div class="card-header">
+            <h3 class="card-title">Service Details</h3>
+
+
+          </div>
+
+          <form role="form" action="" method="POST">
+               {{csrfField()}}
+                <div class="card-body">
+                 <div class="form-group">
+                    <label for="servicename">Service name</label>
+                    <p>{{service.service_name}}</p>
+                  </div>
+                <div class="form-group">
+                    <label for="linkowner">Link Owner</label>
+                    <p>{{service.link_owner}}</p>
+                  </div>
+                  <div class="form-group">
+                    <label for="aggregation">Aggregation</label>
+                    <p>{{service.aggregation}}</p>
+                  </div>
+                  <div class="form-group">
+                    <label for="status">Status</label>
+                    <p>{{service.status}}</p>
+                  </div>
+                  <div class="form-group">
+                    <label for="bandwidth">Bandwidth</label>
+                    <p>{{service.bandwidth}}</p>
+
+                  </div>
+
+                  <div class="form-group">
+                    <label for="vlan">VLAN</label>
+                    <p>{{service.vlan}}</p>
+
+                  </div>
+                  <div class="form-group">
+                    <label for="lastmiletrx">Lastmile Transmission</label>
+                    <p>{{service.last_mile_trx}}</p>
+
+                  </div>
+                  <div class="form-group">
+                    <label for="lastmileeqip">Last Mile Equipment</label>
+                    <p>{{service.last_mile_equipment}}</p>
+
+                  </div>
+                  <div class="form-group">
+                    <label for="coordinates">Coordinates</label>
+                    <p>{{service.coordinates}}</p>
+
+                  </div>
+
+
+
+                </div>
+
+                <!-- /.card-body -->
+
+              </form>
+
+            </div>
+
+
+
+
+
+    </div>
+@endsection
+

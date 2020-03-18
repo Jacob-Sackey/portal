@@ -1,0 +1,79 @@
+@layout('layout.master')
+@section('content')
+   <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Create Role</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item" ><a href="/roles"  class="btn btn-primary">Previous Page</a></li>
+              
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <div class="card card-default">
+          <div class="card-header">
+            <h3 class="card-title">Role Details</h3>
+
+        
+          </div>
+          <form role="form" action="{{route('roles.save')}}" method="post">
+               {{csrfField()}}
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="name">Role Name</label>
+                    <input type="text" class="form-control" name="rolename" placeholder="Enter Role name">
+                     {{ elIf('<span style="color:red">$self</span>', getErrorFor('rolename'), hasErrorFor('rolename')) }}
+                  </div>
+                  <div class="form-group">
+                    <label for="slug">Slug</label>
+                    <input type="text" class="form-control" name="slug" placeholder="Slug">
+                    {{ elIf('<span style="color:red">$self</span>', getErrorFor('slug'), hasErrorFor('slug')) }}
+                  </div>
+                  <div class="form-group">
+                    <label for="Description">Description</label>
+                    <input type="text" class="form-control" name="description" placeholder="Description">
+                     {{ elIf('<span style="color:red">$self</span>', getErrorFor('description'), hasErrorFor('description')) }}
+                  </div>
+                                  
+                  <div class="form-group">
+                   <div class="card-header">
+                    <h3 class="card-title"><b>Permissions</b></h3> 
+                   </div>    
+                    <div class="row">
+                       
+                     @each(permission in permissions)
+                     <div class="col-md-4">
+                        <div class="form-group">
+                         <input type="checkbox" name="permissions[]" value="{{permission.id}}"> {{permission.name}}
+                       </div>
+                       </div>
+                    @endeach     
+                      
+                     </div>   
+                  </div>
+                 
+
+                
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                </div>
+              </form>
+            </div>
+
+
+
+
+
+    </div>
+@endsection

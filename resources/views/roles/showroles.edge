@@ -1,0 +1,103 @@
+@layout('layout.master')
+@section('content')
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+        
+          <div class="col-sm-12">
+          <div class="card">
+          <div class="card-header">
+         
+            <div class="pull-right">
+                <a href="/roles/create" class="btn btn-primary"><i class="fa fa-plus"></i></a>
+            </div>
+            
+            <h1>ROLES</h1>
+            </div>
+             @include('partials.notification')
+
+        
+      <div class="container-fluid">
+
+
+        <div class="row">
+         @each(role in roles)
+          <div class="col-lg-3 col-6">
+            <!-- small card -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3>{{role.name}}</h3>
+
+                
+              </div>
+              <div class="icon">
+                <i class="fa fa-user-o"></i>
+              </div>
+            <a href="/roles/viewing/{{role.id}}" class="btn btn-success"><i class="fa fa-eye"></i></a> 
+            <a href="/roles/edit/{{role.id}}" class="btn btn-warning"><i class="fa fa-edit"></i></a> 
+            <a  class="btn btn-danger delete-role" id="{{role.id}}"><i class="fa fa-trash"></i></a> 
+            </div>
+          </div>
+           @endeach
+        </div>
+
+      
+       
+
+
+
+
+
+
+         
+
+     
+
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+  </div>
+  </div>
+   </div>
+@endsection
+@section('scripts')
+    <script type="text/javascript">
+        $(document).ready(function(){
+        $(document).on('click','.delete-role',function(e){
+            e.preventDefault();
+            const token = '{{ csrfToken }}';
+            const id = $(this).attr('id');
+                swal({
+                    title: "Are you sure?",
+                    text: "Role will be removed permanently.Do you wish to proceed?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                    })
+                .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                     url: '{{route('roles.delete')}}',
+                     type: 'DELETE',
+                     data: {_csrf:token,id:id},
+                     success: function(response){
+                        if(response.status === 'success'){
+                            swal('Role successfully deleted','success')
+                            location.reload()
+                      
+                       
+                      }
+                     }
+                    });
+                } 
+                else {
+                    swal("Role not deleted");
+                }
+                });
+        });
+    });
+</script>
+@endsection
+

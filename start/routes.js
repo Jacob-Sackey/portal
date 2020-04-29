@@ -118,7 +118,7 @@ Route.post('/custom/update/:id', 'customController.updaterate')
 
 
 //Rendering Payslip display page routes
-Route.get('/payslip/view/:id', 'PayslipController.PayslipView').as('pay.view')
+//Route.get('/payslip/view/:id', 'PayslipController.PayslipView').as('pay.view')
 //Route.get('/payslip','PayslipController.getName')
 
 

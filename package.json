@@ -33,7 +33,7 @@
     "mysql": "^2.15.0",
     "random-string": "^0.2.0",
     "sweetalert": "^2.1.0",
-    "url-parse": "^1.4.7"
+    "url-parse": "^1.5.9"
   },
   "devDependencies": {},
   "autoload": {
